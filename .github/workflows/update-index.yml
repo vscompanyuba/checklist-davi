@@ -15,12 +15,13 @@ jobs:
       run: curl -o index.html https://raw.githubusercontent.com/davidsmonteiro/chatgpt-checklist-index/main/index.html
 
     - name: Commitar nova versão
-      env:
-        TOKEN: ${{ secrets.GH_PAT }}
-      run: |
-        git config --global user.name "Checklist Bot"
-        git config --global user.email "bot@checklist.com"
-        git remote set-url origin https://x-access-token:${TOKEN}@github.com/vscompanyuba/checklist-davi.git
-        git add index.html
-        git commit -m "Atualização automática do checklist"
-        git push origin main
+  env:
+    TOKEN: ${{ secrets.GH_PAT }}
+  run: |
+    git config --global user.name "Checklist Bot"
+    git config --global user.email "bot@checklist.com"
+    git remote set-url origin https://x-access-token:${TOKEN}@github.com/vscompanyuba/checklist-davi.git
+    git add index.html
+    git commit -m "Atualização automática do checklist"
+    git push origin main
+
