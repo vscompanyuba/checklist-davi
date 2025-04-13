@@ -3,7 +3,7 @@ name: Atualizar index.html automático
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 5 * * *'  # Executa todo dia às 5h da manhã (UTC)
+    - cron: '0 8 * * *' # 5h BRT (UTC+3 = 8h UTC)
 
 jobs:
   update-index:
@@ -23,6 +23,10 @@ jobs:
           git config --global user.name "Checklist Bot"
           git config --global user.email "bot@checklist.com"
           git remote set-url origin https://x-access-token:${TOKEN}@github.com/vscompanyuba/checklist-davi.git
-          git add index.html
-          git commit -m "Atualização automática do checklist"
-          git push origin main
+
+          if ! git diff --quiet; then
+            git add index.html
+            git commit -m "Atualização automática do checklist"
+            git push origin main
+          else
+            echo "Nenhuma mudança detectada. Nenhum commit necessário."
