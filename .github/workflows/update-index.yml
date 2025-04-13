@@ -15,9 +15,6 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Baixar novo index.html diretamente do ChatGPT
-        run: curl -o index.html "https://chatgpt-static.s3.amazonaws.com/chronic/67fbafa7-57f0-8191-95bb-2ebde46e0607/index.html"
-
       - name: Commitar nova versão
         env:
           TOKEN: ${{ secrets.GH_PAT }}
