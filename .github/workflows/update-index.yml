@@ -8,17 +8,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repositório
-        uses: actions/checkout@v3
+    - name: Checkout repositório
+      uses: actions/checkout@v3
 
-      - name: Baixar novo index.html do ChatGPT
-        run: curl -o index.html https://raw.githubusercontent.com/davidsmonteiro/chatgpt-checklist-index/main/index.html
+    - name: Baixar novo index.html do ChatGPT
+      run: curl -o index.html https://raw.githubusercontent.com/davidsmonteiro/chatgpt-checklist-index/main/index.html
 
-      - name: Commitar nova versão
-        run: |
-          git config --global user.name "Checklist Bot"
-          git config --global user.email "bot@checklist.com"
-          git remote set-url origin https://x-access-token:${{ secrets.GH_PAT }}@github.com/vscompanyuba/checklist-davi.git
-          git add index.html
-          git commit -m "Atualização automática do checklist"
-          git push origin main
+    - name: Commitar nova versão
+      run: |
+        git config --global user.name "Checklist Bot"
+        git config --global user.email "bot@checklist.com"
+        git remote set-url origin https://x-access-token:${{ secrets.GH_PAT }}@github.com/vscompanyuba/checklist-davi.git
+        git add index.html
+        git commit -m "Atualização automática do checklist" || echo "Nada para commitar"
+        git push origin main
