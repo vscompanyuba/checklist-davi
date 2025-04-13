@@ -14,7 +14,7 @@ jobs:
     - name: Baixar novo index.html do ChatGPT
       run: curl -o index.html https://raw.githubusercontent.com/davidsmonteiro/chatgpt-checklist-index/main/index.html
 
-    - name: Commitar nova versão
+        - name: Commitar nova versão
       env:
         TOKEN: ${{ secrets.GH_PAT }}
       run: |
@@ -24,3 +24,4 @@ jobs:
         git add index.html
         git commit -m "Atualização automática do checklist"
         git push origin main
+
