@@ -1,7 +1,9 @@
-name: update-index
+name: Atualizar index.html automático
 
 on:
   workflow_dispatch:
+
+
 
 jobs:
   update-index:
