@@ -3,7 +3,7 @@ name: Atualizar index.html automático
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 8 * * *'  # 5h da manhã no horário de Brasília (UTC+3)
+    - cron: '0 8 * * *'
 
 jobs:
   update-index:
@@ -12,8 +12,10 @@ jobs:
     steps:
       - name: Checkout repositório
         uses: actions/checkout@v3
+        with:
+          persist-credentials: false
 
-      - name: Baixar novo index.html diretamente do ChatGPT (CANVAS)
+      - name: Baixar novo index.html diretamente do ChatGPT
         run: curl -o index.html "https://chatgpt-static.s3.amazonaws.com/chronic/67fbafa7-57f0-8191-95bb-2ebde46e0607/index.html"
 
       - name: Commitar nova versão
@@ -23,11 +25,6 @@ jobs:
           git config --global user.name "Checklist Bot"
           git config --global user.email "bot@checklist.com"
           git remote set-url origin https://x-access-token:${TOKEN}@github.com/vscompanyuba/checklist-davi.git
-          
-          if ! git diff --quiet; then
-            git add index.html
-            git commit -m "Atualização automática do checklist"
-            git push origin main
-          else
-            echo "Nenhuma mudança detectada."
-          fi
+          git add index.html
+          git commit -m "Atualização automática do checklist"
+          git push origin main
