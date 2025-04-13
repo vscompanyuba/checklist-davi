@@ -1,4 +1,4 @@
-name: Atualizar index.html automático
+name: update-index
 
 on:
   workflow_dispatch:
