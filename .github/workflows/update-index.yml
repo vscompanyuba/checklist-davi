@@ -13,9 +13,6 @@ jobs:
       - name: Checkout repositório
         uses: actions/checkout@v3
 
-      - name: Baixar novo index.html do ChatGPT
-        run: curl -o index.html https://raw.githubusercontent.com/davidsmonteiro/chatgpt-checklist-index/main/index.html
-
       - name: Commitar nova versão
         env:
           TOKEN: ${{ secrets.GH_PAT }}
@@ -23,11 +20,6 @@ jobs:
           git config --global user.name "Checklist Bot"
           git config --global user.email "bot@checklist.com"
           git remote set-url origin https://x-access-token:${TOKEN}@github.com/vscompanyuba/checklist-davi.git
-          
-          if ! git diff --quiet; then
-            git add index.html
-            git commit -m "Atualização automática do checklist"
-            git push origin main
-          else
-            echo "Nenhuma mudança detectada."
-          fi
+          git add index.html
+          git commit -m "Atualização automática do checklist"
+          git push origin main
